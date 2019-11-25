@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.Design;
+using System.Data.SqlTypes;
 using System.Linq;
 using System.Runtime.InteropServices.ComTypes;
 using System.Text;
@@ -13,7 +14,7 @@ namespace Datentypen
     public class Baum : IEnumerable
     {
         #region Node
-
+        //test
         public class Node
         {
             public Node Größer { get; set; }
@@ -34,53 +35,20 @@ namespace Datentypen
                 RootNode.Inhalt = item;
                 return;
             }
-            //else if (item < RootNode.Inhalt)
-            //{
-            //    var node = RootNode.Kleiner;
-            //    while (node != null)
-            //    {
-            //        var NächsterNode = node;
-            //        if (item < node.Inhalt)
-            //        {
-            //            node.Inhalt
-            //        }
-
-            //    }
-            //}
 
             var nextNode = RootNode;
 
             do
             {
-                if (CheckObKleiner(item, nextNode) == true && nextNode.Kleiner == null)
+                if (GibMirPassendenNode(item, nextNode)== null)
                 {
-                    nextNode.Kleiner = new Node() { Inhalt = item };
-                }
-                else if (nextNode.Größer == null)
-                {
-                    nextNode.Kleiner = new Node() { Inhalt = item };
+                   nextNode = GibMirPassendenNode(item,nextNode);
+
                 }
 
-                if (nextNode.Größer.Inhalt < item)
-                {
-                    nextNode = nextNode.Größer;
-                }
-                else if (nextNode.Größer.Inhalt > item)
-                {
-                    nextNode = nextNode.Größer.Kleiner;
-                }
-
-
-                if (nextNode.Kleiner.Inhalt > item)
-                {
-                    nextNode = nextNode.Kleiner;
-                }
-                else
-                {
-                    nextNode = nextNode.Kleiner.Größer;
-                }
+                
                 //test
-            } while (b);
+            } while ();
 
         }
 
@@ -93,25 +61,13 @@ namespace Datentypen
             }
             else if (item < node.Inhalt)
             {
+
                 return node.Kleiner;
             }
             else
             {
                 return node.Größer;
             }
-        }
-
-        bool CheckObKleiner(int item, Node node)
-        {
-            var testNode = node;
-
-            bool kleiner = false;
-            if (item < testNode.Inhalt)
-            {
-                return kleiner = true;
-            }
-
-            return kleiner;
         }
 
         public IEnumerator GetEnumerator()
