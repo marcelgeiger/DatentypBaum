@@ -12,8 +12,16 @@ namespace Datentypen
         static void Main(string[] args)
         {
             Baum baum = new Baum();
-            baum.Add(5);
-            Console.WriteLine(baum.RootNode.Inhalt);
+            baum.Add(50);
+            baum.Add(100);
+            baum.Add(25);
+            baum.Add(12);
+            baum.Add(15);
+            baum.Add(210);
+            baum.Add(150);
+            baum.Add(170);
+
+            //Console.WriteLine(baum.RootNode.Inhalt);
             Console.ReadKey();
 
             #region AlteListen

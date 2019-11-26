@@ -40,34 +40,43 @@ namespace Datentypen
 
             do
             {
-                if (GibMirPassendenNode(item, nextNode)== null)
+                if (item == nextNode.Inhalt)
                 {
-                   nextNode = GibMirPassendenNode(item,nextNode);
+                    break;
+                }
+                else if (item < nextNode.Inhalt)
+                {
+                    if (CheckIfFrei(nextNode.Kleiner))
+                    {
+                        nextNode.Kleiner = new Node(){Inhalt = item};
+                        break;
+                    }
 
+                    nextNode = nextNode.Kleiner;
+                }
+                else
+                {
+
+                    if (CheckIfFrei(nextNode.Größer))
+                    {
+                        nextNode.Größer = new Node() { Inhalt = item };
+                        break;
+                    }
+
+                    nextNode = nextNode.Größer;
                 }
 
-                
-                //test
-            } while ();
-
+            } while (true);
         }
 
-        private Node GibMirPassendenNode(int item, Node node)
+
+        bool CheckIfFrei(Node kleiner)
         {
-
-            if (item == node.Inhalt)
+            if (kleiner == null)
             {
-                return node;
+                return true;
             }
-            else if (item < node.Inhalt)
-            {
-
-                return node.Kleiner;
-            }
-            else
-            {
-                return node.Größer;
-            }
+            return false;
         }
 
         public IEnumerator GetEnumerator()
